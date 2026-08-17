@@ -18,19 +18,6 @@ export function useArticleDetail(id: MaybeRefOrGetter<string>) {
   })
 }
 
-export function useArticleTags(id: MaybeRefOrGetter<string>) {
-  return useAPI<TagDTO[]>(() => `/cms/articles/${toValue(id)}/tags`, {
-    method: 'GET'
-  })
-}
-
-export function useArticleCategories(id: MaybeRefOrGetter<string>) {
-  return useAPI<CategoryDTO[]>(
-    () => `/cms/articles/${toValue(id)}/categories`,
-    { method: 'GET' }
-  )
-}
-
 // ===================== 分类 API =====================
 
 export function useCategoryBySlug(slug: MaybeRefOrGetter<string>) {

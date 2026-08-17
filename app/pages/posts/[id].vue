@@ -95,15 +95,16 @@
           <MarkdownRenderer :content="article.content || ''" />
           <!-- 原文链接 -->
           <UAlert
-            v-if="article.sourceType === 1 && article.sourceUrl"
+            v-if="article.source"
             color="neutral"
             variant="subtle"
             icon="i-lucide-external-link"
-            title="转载文章"
+            :title="article.source"
             class="mt-6"
           >
             <template #description>
               <NuxtLink
+                v-if="article.sourceUrl"
                 :to="article.sourceUrl"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -116,39 +117,35 @@
 
           <!-- 分类与标签 -->
           <USeparator
-            v-if="categories?.length || tags?.length"
+            v-if="article?.category || article?.tags?.length"
             class="mt-10 mb-6"
           />
           <footer
-            v-if="categories?.length || tags?.length"
+            v-if="article?.category || article?.tags?.length"
             class="space-y-3"
           >
             <div
-              v-if="categories?.length"
+              v-if="article?.category"
               class="flex items-center gap-2"
             >
               <span class="text-sm text-muted shrink-0">分类：</span>
-              <NuxtLink
-                v-for="cat in categories"
-                :key="cat.id"
-                :to="`/categories/${cat.slug}`"
-              >
+              <NuxtLink :to="`/categories/${article.category.slug}`">
                 <UBadge
                   variant="subtle"
                   color="primary"
                   icon="i-lucide-folder"
                 >
-                  {{ cat.title }}
+                  {{ article.category.title }}
                 </UBadge>
               </NuxtLink>
             </div>
             <div
-              v-if="tags?.length"
+              v-if="article?.tags?.length"
               class="flex items-center gap-2"
             >
               <span class="text-sm text-muted shrink-0">标签：</span>
               <NuxtLink
-                v-for="tag in tags"
+                v-for="tag in article.tags"
                 :key="tag.id"
                 :to="`/tags/${tag.slug}`"
               >
@@ -180,16 +177,12 @@
 const route = useRoute()
 const id = computed(() => getRouteParam(route.params.id))
 
-// 文章详情 + 关联标签 + 关联分类（SSR）
+// 文章详情（SSR，DTO 已内嵌 category / tags）
 const {
   data: article,
   error: articleError,
   pending: articlePending
 } = await useArticleDetail(id)
-
-const { data: tags } = await useArticleTags(id)
-
-const { data: categories } = await useArticleCategories(id)
 
 // SEO
 useSeoMeta({

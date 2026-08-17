@@ -1,65 +1,65 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    "@nuxt/eslint",
-    "@nuxt/ui",
-    "@vueuse/nuxt",
-    "@comark/nuxt",
-    "@nuxt/image",
+    '@nuxt/eslint',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@comark/nuxt',
+    '@nuxt/image'
   ],
 
   devtools: {
-    enabled: true,
+    enabled: true
   },
 
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css'],
   ui: {
     fonts: false,
     prose: true,
     experimental: {
-      componentDetection: true,
-    },
+      componentDetection: true
+    }
   },
   runtimeConfig: {
     public: {
-      apiBaseURL: "/api",
-    },
+      apiBaseURL: '/api'
+    }
   },
 
   routeRules: {
-    "/**": { isr: true },
+    '/**': { isr: true }
   },
 
   devServer: {
-    port: 5000,
+    port: 5000
   },
 
-  compatibilityDate: "2026-06-30",
+  compatibilityDate: '2026-08-18',
 
   nitro: {
     prerender: {
-      autoSubfolderIndex: false,
-    },
+      autoSubfolderIndex: false
+    }
   },
   vite: {
     resolve: {
       alias: {
-        elkjs: "elkjs/lib/elk.bundled.js",
-      },
-    },
+        elkjs: 'elkjs/lib/elk.bundled.js'
+      }
+    }
   },
 
   eslint: {
     config: {
       stylistic: {
-        commaDangle: "never",
-        braceStyle: "1tbs",
-      },
-    },
+        commaDangle: 'never',
+        braceStyle: '1tbs'
+      }
+    }
   },
   icon: {
     clientBundle: {
-      scan: true,
-    },
-  },
-});
+      scan: true
+    }
+  }
+})

@@ -27,8 +27,7 @@ export interface PageResult<T> {
  */
 export interface ArticleDTO {
   id: string
-  authorId?: string
-  slug?: string
+  categoryId?: string
   cover?: string | null
   title: string
   description?: string | null
@@ -40,11 +39,15 @@ export interface ArticleDTO {
   rating?: number
   allowComment?: boolean
   publishAt?: string | null
-  sourceType?: number
+  source?: string | null
   sourceUrl?: string | null
   seoTitle?: string | null
   seoKeywords?: string | null
   seoDescription?: string | null
+  /** 主分类（开放接口详情/列表回填） */
+  category?: CategoryDTO | null
+  /** 关联标签列表（开放接口详情/列表回填） */
+  tags?: TagDTO[] | null
 }
 
 /** useArticles 组合式函数选项 */
@@ -107,11 +110,14 @@ export interface NavItemDTO {
 export interface NoteDTO {
   id: string
   categoryId?: string
-  authorId?: string
   cover?: string | null
   title: string
   description?: string | null
   publishAt?: string | null
+  /** 主分类（开放接口详情/列表回填） */
+  category?: CategoryDTO | null
+  /** 关联标签列表（开放接口详情/列表回填） */
+  tags?: TagDTO[] | null
 }
 
 /** useNotes 组合式函数选项 */
