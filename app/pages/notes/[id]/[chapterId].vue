@@ -1,5 +1,5 @@
 <template>
-  <div class="chapter">
+  <UContainer>
     <!-- 加载中 -->
     <div
       v-if="notePending"
@@ -181,7 +181,7 @@
         />
       </template>
     </USlideover>
-  </div>
+  </UContainer>
 </template>
 
 <script setup lang="ts">

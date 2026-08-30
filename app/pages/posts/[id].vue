@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <UContainer>
     <UPage>
       <template #left>
         <div
@@ -177,7 +177,7 @@
         </div>
       </template>
     </UPage>
-  </div>
+  </UContainer>
 </template>
 
 <script setup lang="ts">
