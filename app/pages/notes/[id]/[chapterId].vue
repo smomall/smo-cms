@@ -133,7 +133,7 @@
       </UPageBody>
       <template #right>
         <div
-          class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) w-full"
+          class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 w-full"
         >
           <MarkdownToc
             v-if="doc"
