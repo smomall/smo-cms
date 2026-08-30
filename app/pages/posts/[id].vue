@@ -162,16 +162,12 @@
         </article>
       </UPageBody>
       <template #right>
-        <!-- <UPageAside v-if="article">
+        <UPageAside class="w-full">
           <MarkdownToc
             v-if="article"
             :content="article.content || ''"
           />
-        </UPageAside> -->
-        <MarkdownToc
-          v-if="article && article.content"
-          :content="article.content || ''"
-        />
+        </UPageAside>
       </template>
     </UPage>
   </UContainer>
