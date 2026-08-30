@@ -27,7 +27,8 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/**': { isr: 1800 }
+    '/**': { isr: 1800 },
+    '/posts/:id': { ssr: true }
   },
 
   devServer: {
