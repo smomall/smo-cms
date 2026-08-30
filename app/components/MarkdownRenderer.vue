@@ -25,10 +25,10 @@ import githubLight from '@shikijs/themes/github-light'
 import githubDark from '@shikijs/themes/github-dark'
 
 interface Props {
-  content?: string | unknown
+  content?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   content: ''
 })
 
