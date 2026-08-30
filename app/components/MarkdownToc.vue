@@ -1,5 +1,7 @@
 <template>
   <UNavigationMenu
+    highlight
+    highlight-color="primary"
     orientation="vertical"
     :items="tocItems"
     default-open="true"

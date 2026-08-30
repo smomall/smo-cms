@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown">
+  <div class="markdown text-pretty">
     <Markdown
       :value="content"
       :options="{ autoUnwrap: true, autoClose: true }"
