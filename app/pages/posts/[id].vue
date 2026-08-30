@@ -1,6 +1,11 @@
 <template>
   <div class="post">
     <UPage>
+      <template #left>
+        <div
+          class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) w-full"
+        />
+      </template>
       <UPageBody>
         <!-- 加载中：骨架屏 -->
         <div
