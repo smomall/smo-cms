@@ -1,16 +1,10 @@
 <template>
-  <UCard class="w-full">
-    <template #header>
-      目录
-    </template>
-
-    <UNavigationMenu
-      orientation="vertical"
-      :items="tocItems"
-      default-open="true"
-      class="w-full"
-    />
-  </UCard>
+  <UNavigationMenu
+    orientation="vertical"
+    :items="tocItems"
+    default-open="true"
+    class="w-full"
+  />
 </template>
 
 <script setup lang="ts">
