@@ -132,17 +132,14 @@
         </article>
       </UPageBody>
       <template #right>
-        <UPageAside
-          class="w-full"
-          :ui="{
-            root: 'hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height)'
-          }"
+        <div
+          class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) w-full"
         >
           <MarkdownToc
             v-if="doc"
             :content="doc.content || ''"
           />
-        </UPageAside>
+        </div>
       </template>
     </UPage>
 
