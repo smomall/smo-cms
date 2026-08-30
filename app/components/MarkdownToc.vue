@@ -3,7 +3,7 @@
     orientation="vertical"
     :items="tocItems"
     default-open="true"
-    class="w-full"
+    class="w-full relative"
   />
 </template>
 
