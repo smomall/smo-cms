@@ -1,12 +1,16 @@
 <template>
   <div class="markdown text-pretty">
-    <Markdown
+    <!-- <Markdown
       v-if="content"
       :options="{ autoUnwrap: true, autoClose: true }"
       :plugins="plugins"
     >
       {{ content }}
-    </Markdown>
+    </Markdown> -->
+    <MarkdownDocument
+      :tree="tree"
+      :options="{ autoUnwrap: true, autoClose: true }"
+    />
   </div>
 </template>
 
@@ -25,12 +29,13 @@ import security from '@comark/nuxt/plugins/security'
 import mermaid from 'mermaid'
 import githubLight from '@shikijs/themes/github-light'
 import githubDark from '@shikijs/themes/github-dark'
+import { parseMarkdown } from 'comark'
 
 interface Props {
   content?: string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   content: ''
 })
 
@@ -47,6 +52,10 @@ const plugins = [
   punctuation(),
   security()
 ]
+
+const tree = await parseMarkdown(props.content, {
+  plugins: plugins
+})
 
 onMounted(async () => {
   mermaid.initialize({ startOnLoad: false })
