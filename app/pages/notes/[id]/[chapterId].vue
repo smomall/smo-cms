@@ -132,12 +132,16 @@
         </article>
       </UPageBody>
       <template #right>
-        <UPageAside>
+        <!-- <UPageAside>
           <MarkdownToc
             v-if="doc"
             :content="doc.content || ''"
           />
-        </UPageAside>
+        </UPageAside> -->
+        <MarkdownToc
+          v-if="doc && doc.content"
+          :content="doc.content || ''"
+        />
       </template>
     </UPage>
 
@@ -232,9 +236,10 @@ const navItems = computed(() => buildNavItems())
 
 // SEO
 useSeoMeta({
-  title: () => doc.value?.title
-    ? `${doc.value.title} - ${note.value?.title || '笔记'}`
-    : (note.value?.title || '笔记'),
+  title: () =>
+    doc.value?.title
+      ? `${doc.value.title} - ${note.value?.title || '笔记'}`
+      : note.value?.title || '笔记',
   description: () => doc.value?.description || note.value?.description,
   ogTitle: () => doc.value?.title || note.value?.title,
   ogDescription: () => doc.value?.description || note.value?.description,
