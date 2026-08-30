@@ -1,10 +1,12 @@
 <template>
   <div class="markdown text-pretty">
     <Markdown
-      :value="content"
+      v-if="content"
       :options="{ autoUnwrap: true, autoClose: true }"
       :plugins="plugins"
-    />
+    >
+      {{ content }}
+    </Markdown>
   </div>
 </template>
 
