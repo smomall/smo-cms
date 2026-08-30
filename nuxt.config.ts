@@ -27,14 +27,14 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/**': { isr: true }
+    '/**': { isr: 1800 }
   },
 
   devServer: {
     port: 5000
   },
 
-  compatibilityDate: '2026-08-18',
+  compatibilityDate: '2026-08-30',
 
   nitro: {
     prerender: {
