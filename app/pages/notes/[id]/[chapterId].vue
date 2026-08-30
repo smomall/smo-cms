@@ -1,14 +1,8 @@
 <template>
-  <UContainer>
+  <div class="chapter">
     <!-- 加载中 -->
-    <div
-      v-if="notePending"
-      class="flex justify-center py-20"
-    >
-      <UIcon
-        name="i-lucide-loader-2"
-        class="h-6 w-6 animate-spin text-muted"
-      />
+    <div v-if="notePending" class="flex justify-center py-20">
+      <UIcon name="i-lucide-loader-2" class="h-6 w-6 animate-spin text-muted" />
     </div>
 
     <!-- 加载失败 -->
@@ -85,10 +79,7 @@
         </UButton>
 
         <!-- 文档切换中 -->
-        <div
-          v-if="docPending && !doc"
-          class="space-y-4"
-        >
+        <div v-if="docPending && !doc" class="space-y-4">
           <USkeleton class="h-4 w-32" />
           <USkeleton class="h-8 w-3/4" />
           <USkeleton class="h-4 w-full" />
@@ -111,10 +102,7 @@
             <h1 class="text-2xl font-bold tracking-tight">
               {{ doc.title }}
             </h1>
-            <p
-              v-if="doc.description"
-              class="mt-2 text-sm text-muted"
-            >
+            <p v-if="doc.description" class="mt-2 text-sm text-muted">
               {{ doc.description }}
             </p>
             <div class="mt-3 flex items-center gap-2">
@@ -135,10 +123,7 @@
         <div
           class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) w-full"
         >
-          <MarkdownToc
-            v-if="doc"
-            :content="doc.content || ''"
-          />
+          <MarkdownToc v-if="doc" :content="doc.content || ''" />
         </div>
       </template>
     </UPage>
@@ -181,40 +166,40 @@
         />
       </template>
     </USlideover>
-  </UContainer>
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { ChapterDTO } from '~/types'
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { ChapterDTO } from "~/types";
+import type { NavigationMenuItem } from "@nuxt/ui";
 
-const route = useRoute()
-const id = computed(() => getRouteParam(route.params.id))
-const chapterId = computed(() => getRouteParam(route.params.chapterId))
+const route = useRoute();
+const id = computed(() => getRouteParam(route.params.id));
+const chapterId = computed(() => getRouteParam(route.params.chapterId));
 
 // 笔记详情 + 章节树（SSR）
 const {
   data: note,
   error: noteError,
-  pending: notePending
-} = await useNoteDetail(id)
+  pending: notePending,
+} = await useNoteDetail(id);
 
-const { data: chapters } = await useNoteChapters(id)
+const { data: chapters } = await useNoteChapters(id);
 const { data: doc, pending: docPending } = await useChapterDocument(
   id,
-  chapterId
-)
+  chapterId,
+);
 
-const slideoverOpen = ref(false)
+const slideoverOpen = ref(false);
 
 // 构建导航树：仅章节链接，默认全部展开
 function buildNavItems(): NavigationMenuItem[] {
   function buildChapter(ch: ChapterDTO): NavigationMenuItem {
-    const children: NavigationMenuItem[] = []
+    const children: NavigationMenuItem[] = [];
 
     if (ch.children?.length) {
       for (const child of ch.children) {
-        children.push(buildChapter(child))
+        children.push(buildChapter(child));
       }
     }
 
@@ -223,25 +208,25 @@ function buildNavItems(): NavigationMenuItem[] {
       to: `/notes/${id.value}/${ch.id}`,
       defaultOpen: true,
       active: chapterId.value === ch.id,
-      children: children.length ? children : undefined
-    }
+      children: children.length ? children : undefined,
+    };
   }
 
-  return (chapters.value ?? []).map(buildChapter)
+  return (chapters.value ?? []).map(buildChapter);
 }
 
-const navItems = computed(() => buildNavItems())
+const navItems = computed(() => buildNavItems());
 
 // SEO
 useSeoMeta({
   title: () =>
     doc.value?.title
-      ? `${doc.value.title} - ${note.value?.title || '笔记'}`
-      : note.value?.title || '笔记',
+      ? `${doc.value.title} - ${note.value?.title || "笔记"}`
+      : note.value?.title || "笔记",
   description: () => doc.value?.description || note.value?.description,
   ogTitle: () => doc.value?.title || note.value?.title,
   ogDescription: () => doc.value?.description || note.value?.description,
   ogImage: () => note.value?.cover,
-  twitterCard: 'summary_large_image'
-})
+  twitterCard: "summary_large_image",
+});
 </script>

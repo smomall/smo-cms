@@ -1,12 +1,9 @@
 <template>
-  <UContainer>
+  <div class="post">
     <UPage>
       <UPageBody>
         <!-- 加载中：骨架屏 -->
-        <div
-          v-if="articlePending"
-          class="space-y-4"
-        >
+        <div v-if="articlePending" class="space-y-4">
           <USkeleton class="h-8 w-3/4" />
           <USkeleton class="h-4 w-1/2" />
           <div class="flex gap-2 pt-1">
@@ -124,36 +121,22 @@
             v-if="article?.category || article?.tags?.length"
             class="space-y-3"
           >
-            <div
-              v-if="article?.category"
-              class="flex items-center gap-2"
-            >
+            <div v-if="article?.category" class="flex items-center gap-2">
               <span class="text-sm text-muted shrink-0">分类：</span>
               <NuxtLink :to="`/categories/${article.category.slug}`">
-                <UBadge
-                  variant="subtle"
-                  color="primary"
-                  icon="i-lucide-folder"
-                >
+                <UBadge variant="subtle" color="primary" icon="i-lucide-folder">
                   {{ article.category.title }}
                 </UBadge>
               </NuxtLink>
             </div>
-            <div
-              v-if="article?.tags?.length"
-              class="flex items-center gap-2"
-            >
+            <div v-if="article?.tags?.length" class="flex items-center gap-2">
               <span class="text-sm text-muted shrink-0">标签：</span>
               <NuxtLink
                 v-for="tag in article.tags"
                 :key="tag.id"
                 :to="`/tags/${tag.slug}`"
               >
-                <UBadge
-                  variant="subtle"
-                  color="neutral"
-                  icon="i-lucide-hash"
-                >
+                <UBadge variant="subtle" color="neutral" icon="i-lucide-hash">
                   {{ tag.title }}
                 </UBadge>
               </NuxtLink>
@@ -165,37 +148,34 @@
         <div
           class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) w-full"
         >
-          <MarkdownToc
-            v-if="article"
-            :content="article.content || ''"
-          />
+          <MarkdownToc v-if="article" :content="article.content || ''" />
         </div>
       </template>
     </UPage>
-  </UContainer>
+  </div>
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const id = computed(() => getRouteParam(route.params.id))
+const route = useRoute();
+const id = computed(() => getRouteParam(route.params.id));
 
 // 文章详情（SSR，DTO 已内嵌 category / tags）
 const {
   data: article,
   error: articleError,
-  pending: articlePending
-} = await useArticleDetail(id)
+  pending: articlePending,
+} = await useArticleDetail(id);
 
 // SEO
 useSeoMeta({
-  title: () => article.value?.seoTitle || article.value?.title || '文章',
+  title: () => article.value?.seoTitle || article.value?.title || "文章",
   description: () =>
     article.value?.seoDescription || article.value?.description,
   ogTitle: () => article.value?.seoTitle || article.value?.title,
   ogDescription: () =>
     article.value?.seoDescription || article.value?.description,
   ogImage: () => article.value?.cover,
-  ogType: 'article',
-  twitterCard: 'summary_large_image'
-})
+  ogType: "article",
+  twitterCard: "summary_large_image",
+});
 </script>
