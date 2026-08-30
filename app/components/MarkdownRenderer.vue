@@ -9,31 +9,32 @@
 </template>
 
 <script setup lang="ts">
-import shiki from "@comark/nuxt/plugins/shiki";
-import math, { Math } from "@comark/nuxt/plugins/math";
-import "katex/dist/katex.min.css";
+import shiki from '@comark/nuxt/plugins/shiki'
+import math, { Math } from '@comark/nuxt/plugins/math'
+import 'katex/dist/katex.min.css'
 
-import binding from "@comark/nuxt/plugins/binding";
-import breaks from "@comark/nuxt/plugins/breaks";
-import emoji from "@comark/nuxt/plugins/emoji";
-import footnotes from "@comark/nuxt/plugins/footnotes";
-import headings from "@comark/nuxt/plugins/headings";
-import punctuation from "@comark/nuxt/plugins/punctuation";
-import security from "@comark/nuxt/plugins/security";
-import mermaid from "mermaid";
-import githubLight from "@shikijs/themes/github-light";
-import githubDark from "@shikijs/themes/github-dark";
+import binding from '@comark/nuxt/plugins/binding'
+import breaks from '@comark/nuxt/plugins/breaks'
+import emoji from '@comark/nuxt/plugins/emoji'
+import footnotes from '@comark/nuxt/plugins/footnotes'
+import headings from '@comark/nuxt/plugins/headings'
+import punctuation from '@comark/nuxt/plugins/punctuation'
+import security from '@comark/nuxt/plugins/security'
+import mermaid from 'mermaid'
+import githubLight from '@shikijs/themes/github-light'
+import githubDark from '@shikijs/themes/github-dark'
+
 interface Props {
-  content?: string | unknown;
+  content?: string | unknown
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  content: "",
-});
+  content: ''
+})
 
 const plugins = [
   shiki({
-    themes: { light: githubLight, dark: githubDark },
+    themes: { light: githubLight, dark: githubDark }
   }),
   math(),
   binding(),
@@ -42,14 +43,14 @@ const plugins = [
   footnotes(),
   headings(),
   punctuation(),
-  security(),
-];
+  security()
+]
 
 onMounted(async () => {
-  mermaid.initialize({ startOnLoad: false });
+  mermaid.initialize({ startOnLoad: false })
   await mermaid.run({
-    querySelector: ".language-mermaid",
-    suppressErrors: true,
-  });
-});
+    querySelector: '.language-mermaid',
+    suppressErrors: true
+  })
+})
 </script>
