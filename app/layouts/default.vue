@@ -8,6 +8,13 @@
       <template #right>
         <UColorModeButton />
       </template>
+      <template #body>
+        <UNavigationMenu
+          :items="headerItems"
+          orientation="vertical"
+          class="-mx-2.5"
+        />
+      </template>
     </UHeader>
     <UMain>
       <slot />
