@@ -169,7 +169,7 @@ onMounted(async () => {
 .markdown h6 {
   white-space: normal !important;
   overflow-wrap: break-word !important;
-  word-break: break-word !important;
+  word-break: break-all !important;
   text-wrap: balance;
   min-width: 0 !important;
 }
