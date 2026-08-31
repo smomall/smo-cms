@@ -8,9 +8,8 @@
       </template>
       <UPageHeader
         v-if="article"
-        :title="article.title"
+        :title="article.title || ''"
         :description="article.description || ''"
-        class="mb-8"
       >
         <template #headline>
           <UBadge
