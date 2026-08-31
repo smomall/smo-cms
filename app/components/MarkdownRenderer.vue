@@ -160,17 +160,3 @@ onMounted(async () => {
   });
 });
 </script>
-<style scoped>
-.markdown h1,
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6 {
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-  word-break: break-all !important;
-  text-wrap: balance;
-  min-width: 0 !important;
-}
-</style>
