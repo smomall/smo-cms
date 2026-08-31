@@ -145,6 +145,7 @@
 
     <!-- 移动端目录抽屉 -->
     <div class="sticky top-(--ui-header-height)">
+      <UButton>目录</UButton>
       <USlideover
         v-if="note"
         v-model:open="slideoverOpen"
