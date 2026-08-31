@@ -148,46 +148,47 @@
       v-if="note"
       class="fixed right-0 top-1/2 -translate-y-1/2 z-10 md:hidden"
     >
-      <UButton
-        icon="i-lucide-menu"
-        color="neutral"
-        variant="ghost"
-        :ui="{
-          leadingIcon: 'text-primary'
-        }"
-        size="md"
-        class="font-bold rounded-full"
-        @click="slideoverOpen = true"
-      >
-        章节目录
-      </UButton>
-      <UDrawer
-        direction="right"
-        close
-        title="文章目录"
-      >
+      <div class="flex flex-col gap-2">
         <UButton
           icon="i-lucide-menu"
           color="neutral"
-          variant="ghost"
+          variant="solid"
           :ui="{
             leadingIcon: 'text-primary'
           }"
           size="md"
           class="font-bold rounded-full"
+          @click="slideoverOpen = true"
         >
-          文章目录
+          章节目录
         </UButton>
+        <UDrawer
+          direction="right"
+          title="文章目录"
+        >
+          <UButton
+            icon="i-lucide-menu"
+            color="neutral"
+            variant="solid"
+            :ui="{
+              leadingIcon: 'text-primary'
+            }"
+            size="md"
+            class="font-bold rounded-full"
+          >
+            文章目录
+          </UButton>
 
-        <template #content>
-          <div class="min-w-96 min-h-96 size-full m-4">
-            <MarkdownToc
-              v-if="doc"
-              :content="doc.content || ''"
-            />
-          </div>
-        </template>
-      </UDrawer>
+          <template #content>
+            <div class="min-w-96 min-h-96 size-full m-4">
+              <MarkdownToc
+                v-if="doc"
+                :content="doc.content || ''"
+              />
+            </div>
+          </template>
+        </UDrawer>
+      </div>
     </div>
     <USlideover
       v-if="note"
