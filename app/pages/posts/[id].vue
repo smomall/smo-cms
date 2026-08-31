@@ -21,7 +21,54 @@
             :label="formatDateCN(article.publishAt)"
           />
         </template>
-        <template #links>
+        <template #links />
+      </UPageHeader>
+      <UPageBody>
+        <!-- 加载中：骨架屏 -->
+        <div
+          v-if="articlePending"
+          class="space-y-4"
+        >
+          <USkeleton class="h-8 w-3/4" />
+          <USkeleton class="h-4 w-1/2" />
+          <div class="flex gap-2 pt-1">
+            <USkeleton class="h-5 w-20" />
+            <USkeleton class="h-5 w-16" />
+            <USkeleton class="h-5 w-16" />
+          </div>
+          <USkeleton class="h-4 w-full mt-6" />
+          <USkeleton class="h-4 w-full" />
+          <USkeleton class="h-4 w-5/6" />
+          <USkeleton class="h-4 w-full" />
+          <USkeleton class="h-4 w-4/5" />
+        </div>
+
+        <!-- 加载失败 -->
+        <UAlert
+          v-else-if="articleError"
+          color="error"
+          variant="subtle"
+          icon="i-lucide-alert-circle"
+          title="加载失败"
+          action-text="返回首页"
+          to="/"
+          class="mt-8"
+        />
+
+        <!-- 文章不存在 -->
+        <UAlert
+          v-else-if="!article"
+          color="neutral"
+          variant="subtle"
+          icon="i-lucide-file-x"
+          title="文章不存在"
+          action-text="返回首页"
+          to="/"
+          class="mt-8"
+        />
+
+        <!-- 文章正文 -->
+        <article v-else>
           <div
             v-if="article?.category"
             class="flex items-center gap-2"
@@ -82,54 +129,6 @@
               :label="`${article.commentCount}`"
             />
           </div>
-        </template>
-      </UPageHeader>
-      <UPageBody>
-        <!-- 加载中：骨架屏 -->
-        <div
-          v-if="articlePending"
-          class="space-y-4"
-        >
-          <USkeleton class="h-8 w-3/4" />
-          <USkeleton class="h-4 w-1/2" />
-          <div class="flex gap-2 pt-1">
-            <USkeleton class="h-5 w-20" />
-            <USkeleton class="h-5 w-16" />
-            <USkeleton class="h-5 w-16" />
-          </div>
-          <USkeleton class="h-4 w-full mt-6" />
-          <USkeleton class="h-4 w-full" />
-          <USkeleton class="h-4 w-5/6" />
-          <USkeleton class="h-4 w-full" />
-          <USkeleton class="h-4 w-4/5" />
-        </div>
-
-        <!-- 加载失败 -->
-        <UAlert
-          v-else-if="articleError"
-          color="error"
-          variant="subtle"
-          icon="i-lucide-alert-circle"
-          title="加载失败"
-          action-text="返回首页"
-          to="/"
-          class="mt-8"
-        />
-
-        <!-- 文章不存在 -->
-        <UAlert
-          v-else-if="!article"
-          color="neutral"
-          variant="subtle"
-          icon="i-lucide-file-x"
-          title="文章不存在"
-          action-text="返回首页"
-          to="/"
-          class="mt-8"
-        />
-
-        <!-- 文章正文 -->
-        <article v-else>
           <MarkdownRenderer :content="article.content || ''" />
           <!-- 原文链接 -->
           <UAlert
