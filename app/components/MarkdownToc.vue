@@ -53,24 +53,24 @@ if (r?.meta?.toc) {
   tocData.value = r?.meta?.toc
 }
 
-function buildLink(link: TocLink): NavigationMenuItem {
+function buildLink(link: TocLink, hash?: string): NavigationMenuItem {
   const children: NavigationMenuItem[] = []
-
   if (link.children?.length) {
     for (const child of link.children) {
-      children.push(buildLink(child))
+      children.push(buildLink(child, hash))
     }
   }
   return {
     label: link.text,
     to: `#${link.id}`,
-    active: link.id === (route.hash || ''),
+    active: link.id === (hash || ''),
     defaultOpen: true,
     children: children.length ? children : []
   }
 }
 
 const tocItems = computed<NavigationMenuItem[]>(() => {
-  return (tocData.value?.links ?? []).map(buildLink)
+  const currentHash = route.hash
+  return (tocData.value?.links ?? []).map(item => buildLink(item, currentHash))
 })
 </script>
