@@ -144,7 +144,7 @@
     </UPage>
 
     <!-- 移动端目录抽屉 -->
-    <div class="sticky top-(--ui-header-height)">
+    <div class="fixed left-0 top-(--ui-header-height) z-10">
       <UButton>目录</UButton>
       <USlideover
         v-if="note"
