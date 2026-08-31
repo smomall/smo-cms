@@ -12,24 +12,10 @@
 <script setup lang="ts">
 import { parseMarkdown } from 'comark'
 import headings from '@comark/nuxt/plugins/headings'
-import toc from '@comark/nuxt/plugins/toc'
+import toc, { type TocLink } from '@comark/nuxt/plugins/toc'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const route = useRoute()
-
-interface TocLink {
-  id: string
-  text: string
-  depth: number
-  children?: TocLink[]
-}
-
-interface TocTree {
-  title: string
-  depth: number
-  searchDepth: number
-  links: TocLink[]
-}
 
 interface Props {
   content?: string
@@ -42,16 +28,13 @@ const props = withDefaults(defineProps<Props>(), {
   depth: 5,
   searchDepth: 5
 })
-const tocData = ref<TocTree>()
-const r = await parseMarkdown(props.content || '', {
+
+const result = await parseMarkdown(props.content || '', {
   plugins: [
     headings(),
     toc({ depth: props.depth, searchDepth: props.searchDepth })
   ]
 })
-if (r?.meta?.toc) {
-  tocData.value = r?.meta?.toc
-}
 
 function buildLink(link: TocLink, hash?: string): NavigationMenuItem {
   const children: NavigationMenuItem[] = []
@@ -65,12 +48,14 @@ function buildLink(link: TocLink, hash?: string): NavigationMenuItem {
     to: `#${link.id}`,
     active: link.id === (hash || ''),
     defaultOpen: true,
-    children: children.length ? children : []
+    children: children || []
   }
 }
 
 const tocItems = computed<NavigationMenuItem[]>(() => {
   const currentHash = route.hash
-  return (tocData.value?.links ?? []).map(item => buildLink(item, currentHash))
+  return (result?.meta?.toc?.links ?? []).map(item =>
+    buildLink(item, currentHash)
+  )
 })
 </script>
