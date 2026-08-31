@@ -1,5 +1,5 @@
 /** 后端统一响应结构 */
-interface ApiResponse<T = unknown> {
+interface ApiResponse<T = unknown | null> {
   code: number
   msg: string
   data: T
@@ -10,7 +10,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const api = $fetch.create({
     baseURL: config.public.apiBaseURL,
     timeout: 15000,
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onRequest({ request, options }) {
       // 暂不实现
     },
