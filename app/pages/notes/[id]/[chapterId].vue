@@ -144,46 +144,59 @@
     </UPage>
 
     <!-- 移动端目录抽屉 -->
-    <div class="fixed left-0 top-(--ui-header-height) z-10">
-      <UButton>目录</UButton>
-      <USlideover
-        v-if="note"
-        v-model:open="slideoverOpen"
-        title="目录"
-        :ui="{ content: 'w-80' }"
+    <div
+      v-if="note"
+      class="fixed left-0 top-(--ui-header-height) z-10 md:hidden"
+    >
+      <UButton
+        icon="i-lucide-folder"
+        color="neutral"
+        variant="outline"
+        :ui="{
+          leadingIcon: 'text-primary'
+        }"
+        @click="slideoverOpen = true"
       >
-        <template #body>
-          <UButton
-            :to="`/notes/${id}`"
-            variant="ghost"
-            color="neutral"
-            size="sm"
-            icon="i-lucide-arrow-left"
-            class="mb-3"
-          >
-            {{ note?.title }}
-          </UButton>
-
-          <UAlert
-            v-if="!chapters?.length"
-            color="neutral"
-            variant="subtle"
-            icon="i-lucide-folder-x"
-            title="暂无章节"
-          />
-
-          <UNavigationMenu
-            v-else
-            orientation="vertical"
-            :items="navItems"
-            default-open
-            highlight
-            highlight-color="primary"
-            class="w-full"
-          />
-        </template>
-      </USlideover>
+        目录
+      </UButton>
     </div>
+    <USlideover
+      v-if="note"
+      v-model:open="slideoverOpen"
+      title="目录"
+      :ui="{ content: 'w-80' }"
+    >
+      <template #body>
+        <UButton
+          :to="`/notes/${id}`"
+          variant="ghost"
+          color="neutral"
+          size="sm"
+          icon="i-lucide-arrow-left"
+          class="mb-3"
+        >
+          {{ note?.title }}
+        </UButton>
+
+        <UAlert
+          v-if="!chapters?.length"
+          color="neutral"
+          variant="subtle"
+          icon="i-lucide-folder-x"
+          title="暂无章节"
+        />
+
+        <UNavigationMenu
+          v-else
+          orientation="vertical"
+          :items="navItems"
+          default-open
+          highlight
+          highlight-color="primary"
+          class="w-full"
+        />
+      </template>
+    </USlideover>
   </UContainer>
 </template>
 
