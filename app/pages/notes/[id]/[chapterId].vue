@@ -147,6 +147,7 @@
     <USlideover
       v-if="note"
       v-model:open="slideoverOpen"
+      class="sticky top-(--ui-header-height)"
       title="目录"
       :ui="{ content: 'w-80' }"
     >
