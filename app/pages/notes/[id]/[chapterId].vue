@@ -75,16 +75,7 @@
         :title="doc.title || ''"
         :description="doc.description || ''"
       >
-        <template #headline>
-          <UBadge
-            v-if="doc.wordCount"
-            color="neutral"
-            variant="subtle"
-            size="sm"
-            icon="i-lucide-file-text"
-            :label="`约 ${doc.wordCount} 字`"
-          />
-        </template>
+        <template #headline />
         <template #links />
       </UPageHeader>
       <!-- 右侧：文档内容 -->
@@ -112,6 +103,16 @@
 
         <!-- 文档正文 -->
         <article v-else>
+          <div class="flex flex-wrap items-end gap-2 py-2">
+            <UBadge
+              v-if="doc.wordCount"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              icon="i-lucide-file-text"
+              :label="`约 ${doc.wordCount} 字`"
+            />
+          </div>
           <MarkdownRenderer :content="doc.content || ''" />
         </article>
       </UPageBody>

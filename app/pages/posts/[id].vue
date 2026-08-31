@@ -18,7 +18,7 @@
             variant="subtle"
             size="sm"
             icon="i-lucide-calendar"
-            :label="formatDateCN(article.publishAt)"
+            :label="article.publishAt"
           />
         </template>
         <template #links />
