@@ -177,6 +177,44 @@
         </div>
       </template>
     </UPage>
+    <div
+      v-if="article"
+      class="fixed right-0 top-1/2 -translate-y-1/2 z-10 md:hidden"
+    >
+      <div class="flex flex-col gap-2">
+        <UDrawer
+          direction="right"
+          title="文章目录"
+          :close="{
+            color: 'neutral',
+            variant: 'outline',
+            class: 'rounded-full'
+          }"
+        >
+          <UButton
+            icon="i-lucide-menu"
+            color="neutral"
+            variant="solid"
+            :ui="{
+              leadingIcon: 'text-primary'
+            }"
+            size="md"
+            class="font-bold rounded-full"
+          >
+            文章目录
+          </UButton>
+
+          <template #content>
+            <div class="min-w-96 min-h-96 size-full m-4">
+              <MarkdownToc
+                v-if="article"
+                :content="article.content || ''"
+              />
+            </div>
+          </template>
+        </UDrawer>
+      </div>
+    </div>
   </UContainer>
 </template>
 

@@ -73,17 +73,6 @@
 
       <!-- 右侧：文档内容 -->
       <UPageBody>
-        <!-- 移动端目录按钮 -->
-        <UButton
-          variant="outline"
-          color="neutral"
-          icon="i-lucide-list"
-          class="lg:hidden mb-4"
-          @click="slideoverOpen = true"
-        >
-          目录
-        </UButton>
-
         <!-- 文档切换中 -->
         <div
           v-if="docPending && !doc"
@@ -152,7 +141,11 @@
         <UDrawer
           direction="right"
           title="章节目录"
-          close
+          :close="{
+            color: 'neutral',
+            variant: 'outline',
+            class: 'rounded-full'
+          }"
         >
           <UButton
             icon="i-lucide-menu"
@@ -203,7 +196,11 @@
         <UDrawer
           direction="right"
           title="文章目录"
-          close
+          :close="{
+            color: 'neutral',
+            variant: 'outline',
+            class: 'rounded-full'
+          }"
         >
           <UButton
             icon="i-lucide-menu"
@@ -252,8 +249,6 @@ const { data: doc, pending: docPending } = await useChapterDocument(
   id,
   chapterId
 )
-
-const slideoverOpen = ref(false)
 
 // 构建导航树：仅章节链接，默认全部展开
 function buildNavItems(): NavigationMenuItem[] {
