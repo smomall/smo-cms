@@ -36,6 +36,7 @@ export interface ArticleDTO {
   viewCount?: number | null
   likeCount?: number | null
   commentCount?: number | null
+  wordCount?: number | null
   rating?: number
   allowComment?: boolean
   publishAt?: string | null

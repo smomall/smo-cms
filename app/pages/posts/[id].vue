@@ -103,14 +103,14 @@
               </UBadge>
             </NuxtLink>
           </div>
-          <div class="flex flex-wrap items-center gap-2 py-2">
+          <div class="flex flex-wrap items-end gap-2 py-2">
             <UBadge
               v-if="article.viewCount != null"
               color="neutral"
               variant="subtle"
               size="sm"
               icon="i-lucide-eye"
-              :label="`${article.viewCount} 阅读`"
+              :label="`${article.viewCount}`"
             />
             <UBadge
               v-if="article.likeCount != null"
@@ -127,6 +127,14 @@
               size="sm"
               icon="i-lucide-message-circle"
               :label="`${article.commentCount}`"
+            />
+            <UBadge
+              v-if="article.wordCount"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              icon="i-lucide-file-text"
+              :label="`约 ${article.wordCount} 字`"
             />
           </div>
           <USeparator />
