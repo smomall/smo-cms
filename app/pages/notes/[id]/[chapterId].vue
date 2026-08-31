@@ -70,7 +70,23 @@
           />
         </UPageAside>
       </template>
-
+      <UPageHeader
+        v-if="doc"
+        :title="doc.title || ''"
+        :description="doc.description || ''"
+      >
+        <template #headline>
+          <UBadge
+            v-if="doc.wordCount"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            icon="i-lucide-file-text"
+            :label="`约 ${doc.wordCount} 字`"
+          />
+        </template>
+        <template #links />
+      </UPageHeader>
       <!-- 右侧：文档内容 -->
       <UPageBody>
         <!-- 文档切换中 -->
@@ -96,27 +112,6 @@
 
         <!-- 文档正文 -->
         <article v-else>
-          <header class="mb-6 pb-4 border-b border-default">
-            <h1 class="text-2xl font-bold tracking-tight">
-              {{ doc.title }}
-            </h1>
-            <p
-              v-if="doc.description"
-              class="mt-2 text-sm text-muted"
-            >
-              {{ doc.description }}
-            </p>
-            <div class="mt-3 flex items-center gap-2">
-              <UBadge
-                v-if="doc.wordCount"
-                color="neutral"
-                variant="subtle"
-                size="sm"
-                icon="i-lucide-file-text"
-                :label="`约 ${doc.wordCount} 字`"
-              />
-            </div>
-          </header>
           <MarkdownRenderer :content="doc.content || ''" />
         </article>
       </UPageBody>

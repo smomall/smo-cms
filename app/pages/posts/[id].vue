@@ -71,7 +71,7 @@
         <article v-else>
           <div
             v-if="article?.category"
-            class="flex items-center gap-2"
+            class="flex items-center gap-2 py-2"
           >
             <span class="text-sm text-muted shrink-0">分类：</span>
             <NuxtLink :to="`/categories/${article.category.slug}`">
@@ -86,7 +86,7 @@
           </div>
           <div
             v-if="article?.tags?.length"
-            class="flex items-center gap-2"
+            class="flex items-center gap-2 py-2"
           >
             <span class="text-sm text-muted shrink-0">标签：</span>
             <NuxtLink
@@ -103,7 +103,7 @@
               </UBadge>
             </NuxtLink>
           </div>
-          <div class="flex flex-wrap items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2 py-2">
             <UBadge
               v-if="article.viewCount != null"
               color="neutral"
