@@ -167,11 +167,10 @@ onMounted(async () => {
 .markdown h4,
 .markdown h5,
 .markdown h6 {
-  /* 长无空格标识符自动换行 */
-  overflow-wrap: break-word;
-  /* 标题均衡换行排版 */
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
   text-wrap: balance;
-  /* flex父容器换行兜底修复 */
-  min-width: 0;
+  min-width: 0 !important;
 }
 </style>
