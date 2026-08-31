@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import shiki from '@comark/nuxt/plugins/shiki'
 import math from '@comark/nuxt/plugins/math'
+// import beautifulMermaid from '@comark/nuxt/plugins/mermaid'
 import 'katex/dist/katex.min.css'
 import binding from '@comark/nuxt/plugins/binding'
 import breaks from '@comark/nuxt/plugins/breaks'
@@ -144,6 +145,7 @@ const plugins = [
     }
   }),
   math(),
+  // beautifulMermaid(),
   binding(),
   emoji(),
   breaks(),

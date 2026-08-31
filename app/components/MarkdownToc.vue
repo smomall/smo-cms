@@ -62,6 +62,7 @@ function buildLink(link: TocLink): NavigationMenuItem {
   return {
     label: link.text,
     to: `#${link.id}`,
+    active: link.id === (window.location.hash.slice(1) || ''),
     defaultOpen: true,
     children: children.length ? children : []
   }
