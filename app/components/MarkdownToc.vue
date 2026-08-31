@@ -15,6 +15,8 @@ import headings from '@comark/nuxt/plugins/headings'
 import toc from '@comark/nuxt/plugins/toc'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const route = useRoute()
+
 interface TocLink {
   id: string
   text: string
@@ -62,7 +64,7 @@ function buildLink(link: TocLink): NavigationMenuItem {
   return {
     label: link.text,
     to: `#${link.id}`,
-    active: link.id === (window.location.hash.slice(1) || ''),
+    active: link.id === (route.hash || ''),
     defaultOpen: true,
     children: children.length ? children : []
   }
