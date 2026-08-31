@@ -129,6 +129,7 @@
               :label="`${article.commentCount}`"
             />
           </div>
+          <USeparator />
           <MarkdownRenderer :content="article.content || ''" />
           <!-- 原文链接 -->
           <UAlert
@@ -151,7 +152,7 @@
               </NuxtLink>
             </template>
           </UAlert>
-          <USeparator class="mt-10 mb-6" />
+          <USeparator />
         </article>
       </UPageBody>
       <template #right>
