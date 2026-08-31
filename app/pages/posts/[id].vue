@@ -21,45 +21,40 @@
             icon="i-lucide-calendar"
             :label="formatDateCN(article.publishAt)"
           />
-          <footer
-            v-if="article?.category || article?.tags?.length"
-            class="space-y-3"
+          <div
+            v-if="article?.category"
+            class="flex items-center gap-2"
           >
-            <div
-              v-if="article?.category"
-              class="flex items-center gap-2"
-            >
-              <span class="text-sm text-muted shrink-0">分类：</span>
-              <NuxtLink :to="`/categories/${article.category.slug}`">
-                <UBadge
-                  variant="subtle"
-                  color="primary"
-                  icon="i-lucide-folder"
-                >
-                  {{ article.category.title }}
-                </UBadge>
-              </NuxtLink>
-            </div>
-            <div
-              v-if="article?.tags?.length"
-              class="flex items-center gap-2"
-            >
-              <span class="text-sm text-muted shrink-0">标签：</span>
-              <NuxtLink
-                v-for="tag in article.tags"
-                :key="tag.id"
-                :to="`/tags/${tag.slug}`"
+            <span class="text-sm text-muted shrink-0">分类：</span>
+            <NuxtLink :to="`/categories/${article.category.slug}`">
+              <UBadge
+                variant="subtle"
+                color="primary"
+                icon="i-lucide-folder"
               >
-                <UBadge
-                  variant="subtle"
-                  color="neutral"
-                  icon="i-lucide-hash"
-                >
-                  {{ tag.title }}
-                </UBadge>
-              </NuxtLink>
-            </div>
-          </footer>
+                {{ article.category.title }}
+              </UBadge>
+            </NuxtLink>
+          </div>
+          <div
+            v-if="article?.tags?.length"
+            class="flex items-center gap-2"
+          >
+            <span class="text-sm text-muted shrink-0">标签：</span>
+            <NuxtLink
+              v-for="tag in article.tags"
+              :key="tag.id"
+              :to="`/tags/${tag.slug}`"
+            >
+              <UBadge
+                variant="subtle"
+                color="neutral"
+                icon="i-lucide-hash"
+              >
+                {{ tag.title }}
+              </UBadge>
+            </NuxtLink>
+          </div>
         </template>
         <template #links>
           <div class="flex flex-wrap items-center gap-2">
