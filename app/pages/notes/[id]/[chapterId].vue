@@ -144,44 +144,45 @@
     </UPage>
 
     <!-- 移动端目录抽屉 -->
-    <USlideover
-      v-if="note"
-      v-model:open="slideoverOpen"
-      class="sticky top-(--ui-header-height)"
-      title="目录"
-      :ui="{ content: 'w-80' }"
-    >
-      <template #body>
-        <UButton
-          :to="`/notes/${id}`"
-          variant="ghost"
-          color="neutral"
-          size="sm"
-          icon="i-lucide-arrow-left"
-          class="mb-3"
-        >
-          {{ note?.title }}
-        </UButton>
+    <div class="sticky top-(--ui-header-height)">
+      <USlideover
+        v-if="note"
+        v-model:open="slideoverOpen"
+        title="目录"
+        :ui="{ content: 'w-80' }"
+      >
+        <template #body>
+          <UButton
+            :to="`/notes/${id}`"
+            variant="ghost"
+            color="neutral"
+            size="sm"
+            icon="i-lucide-arrow-left"
+            class="mb-3"
+          >
+            {{ note?.title }}
+          </UButton>
 
-        <UAlert
-          v-if="!chapters?.length"
-          color="neutral"
-          variant="subtle"
-          icon="i-lucide-folder-x"
-          title="暂无章节"
-        />
+          <UAlert
+            v-if="!chapters?.length"
+            color="neutral"
+            variant="subtle"
+            icon="i-lucide-folder-x"
+            title="暂无章节"
+          />
 
-        <UNavigationMenu
-          v-else
-          orientation="vertical"
-          :items="navItems"
-          default-open
-          highlight
-          highlight-color="primary"
-          class="w-full"
-        />
-      </template>
-    </USlideover>
+          <UNavigationMenu
+            v-else
+            orientation="vertical"
+            :items="navItems"
+            default-open
+            highlight
+            highlight-color="primary"
+            class="w-full"
+          />
+        </template>
+      </USlideover>
+    </div>
   </UContainer>
 </template>
 
