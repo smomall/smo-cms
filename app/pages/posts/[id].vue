@@ -205,7 +205,7 @@
           </UButton>
 
           <template #content>
-            <div class="min-w-96 min-h-96 size-full m-4">
+            <div class="min-w-96 min-h-96 size-full m-4 overflow-y-auto">
               <MarkdownToc
                 v-if="article"
                 :content="article.content || ''"
