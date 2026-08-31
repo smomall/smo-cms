@@ -149,22 +149,61 @@
       class="fixed right-0 top-1/2 -translate-y-1/2 z-10 md:hidden"
     >
       <div class="flex flex-col gap-2">
-        <UButton
-          icon="i-lucide-menu"
-          color="neutral"
-          variant="solid"
-          :ui="{
-            leadingIcon: 'text-primary'
-          }"
-          size="md"
-          class="font-bold rounded-full"
-          @click="slideoverOpen = true"
+        <UDrawer
+          direction="right"
+          title="章节目录"
+          close
         >
-          章节目录
-        </UButton>
+          <UButton
+            icon="i-lucide-menu"
+            color="neutral"
+            variant="solid"
+            :ui="{
+              leadingIcon: 'text-primary'
+            }"
+            size="md"
+            class="font-bold rounded-full"
+          >
+            章节目录
+          </UButton>
+
+          <template #content>
+            <div class="min-w-96 min-h-96 size-full m-4">
+              <UButton
+                :to="`/notes/${id}`"
+                variant="ghost"
+                color="neutral"
+                size="sm"
+                icon="i-lucide-arrow-left"
+                class="mb-3"
+              >
+                {{ note?.title }}
+              </UButton>
+
+              <UAlert
+                v-if="!chapters?.length"
+                color="neutral"
+                variant="subtle"
+                icon="i-lucide-folder-x"
+                title="暂无章节"
+              />
+
+              <UNavigationMenu
+                v-else
+                orientation="vertical"
+                :items="navItems"
+                default-open
+                highlight
+                highlight-color="primary"
+                class="w-full"
+              />
+            </div>
+          </template>
+        </UDrawer>
         <UDrawer
           direction="right"
           title="文章目录"
+          close
         >
           <UButton
             icon="i-lucide-menu"
@@ -190,43 +229,6 @@
         </UDrawer>
       </div>
     </div>
-    <USlideover
-      v-if="note"
-      v-model:open="slideoverOpen"
-      title="章节目录"
-      :ui="{ content: 'w-80' }"
-    >
-      <template #body>
-        <UButton
-          :to="`/notes/${id}`"
-          variant="ghost"
-          color="neutral"
-          size="sm"
-          icon="i-lucide-arrow-left"
-          class="mb-3"
-        >
-          {{ note?.title }}
-        </UButton>
-
-        <UAlert
-          v-if="!chapters?.length"
-          color="neutral"
-          variant="subtle"
-          icon="i-lucide-folder-x"
-          title="暂无章节"
-        />
-
-        <UNavigationMenu
-          v-else
-          orientation="vertical"
-          :items="navItems"
-          default-open
-          highlight
-          highlight-color="primary"
-          class="w-full"
-        />
-      </template>
-    </USlideover>
   </UContainer>
 </template>
 
