@@ -20,6 +20,8 @@
             icon="i-lucide-calendar"
             :label="formatDateCN(article.publishAt)"
           />
+        </template>
+        <template #links>
           <div
             v-if="article?.category"
             class="flex items-center gap-2"
@@ -54,8 +56,6 @@
               </UBadge>
             </NuxtLink>
           </div>
-        </template>
-        <template #links>
           <div class="flex flex-wrap items-center gap-2">
             <UBadge
               v-if="article.viewCount != null"
