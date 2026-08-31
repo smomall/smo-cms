@@ -146,25 +146,49 @@
     <!-- 移动端目录抽屉 -->
     <div
       v-if="note"
-      class="fixed left-0 top-1/2 -translate-y-1/2 z-10 md:hidden"
+      class="fixed right-0 top-1/2 -translate-y-1/2 z-10 md:hidden"
     >
       <UButton
         icon="i-lucide-menu"
         color="neutral"
-        variant="outline"
+        variant="ghost"
         :ui="{
           leadingIcon: 'text-primary'
         }"
         size="md"
+        class="font-bold rounded-full"
         @click="slideoverOpen = true"
       >
-        目录
+        章节目录
       </UButton>
+      <UDrawer direction="right">
+        <UButton
+          icon="i-lucide-menu"
+          color="neutral"
+          variant="ghost"
+          :ui="{
+            leadingIcon: 'text-primary'
+          }"
+          size="md"
+          class="font-bold rounded-full"
+        >
+          文章目录
+        </UButton>
+
+        <template #content>
+          <div class="min-w-96 min-h-96 size-full m-4">
+            <MarkdownToc
+              v-if="doc"
+              :content="doc.content || ''"
+            />
+          </div>
+        </template>
+      </UDrawer>
     </div>
     <USlideover
       v-if="note"
       v-model:open="slideoverOpen"
-      title="目录"
+      title="章节目录"
       :ui="{ content: 'w-80' }"
     >
       <template #body>
