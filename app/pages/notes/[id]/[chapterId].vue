@@ -160,7 +160,7 @@
             章节目录
           </UButton>
 
-          <template #content>
+          <template #body>
             <div class="min-w-96 size-full m-4 overflow-y-auto">
               <UButton
                 :to="`/notes/${id}`"
@@ -215,7 +215,7 @@
             文章目录
           </UButton>
 
-          <template #content>
+          <template #body>
             <div class="min-w-96 size-full m-4 overflow-y-auto">
               <MarkdownToc
                 v-if="doc"
