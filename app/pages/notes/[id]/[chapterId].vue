@@ -161,7 +161,11 @@
       >
         章节目录
       </UButton>
-      <UDrawer direction="right">
+      <UDrawer
+        direction="right"
+        close
+        title="文章目录"
+      >
         <UButton
           icon="i-lucide-menu"
           color="neutral"
