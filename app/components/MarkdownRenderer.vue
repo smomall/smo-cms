@@ -161,12 +161,12 @@ onMounted(async () => {
 });
 </script>
 <style scoped>
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
   /* 长无空格标识符自动换行 */
   overflow-wrap: break-word;
   /* 标题均衡换行排版 */
