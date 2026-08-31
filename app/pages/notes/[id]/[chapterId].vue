@@ -146,15 +146,16 @@
     <!-- 移动端目录抽屉 -->
     <div
       v-if="note"
-      class="fixed left-0 top-(--ui-header-height) z-10 md:hidden"
+      class="fixed left-0 top-1/2 -translate-y-1/2 z-10 md:hidden"
     >
       <UButton
-        icon="i-lucide-folder"
+        icon="i-lucide-menu"
         color="neutral"
         variant="outline"
         :ui="{
           leadingIcon: 'text-primary'
         }"
+        size="md"
         @click="slideoverOpen = true"
       >
         目录
