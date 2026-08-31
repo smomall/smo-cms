@@ -21,15 +21,29 @@ html.dark .shiki {
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
+
 .markdown h1,
 .markdown h2,
 .markdown h3,
 .markdown h4,
 .markdown h5,
 .markdown h6 {
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-  word-break: break-word !important;
+  overflow-wrap: break-word;
   text-wrap: balance;
-  min-width: 0 !important;
+  min-width: 0;
+}
+
+.markdown {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  min-width: 0;
+}
+
+.markdown pre {
+  overflow-x: auto;
+  min-width: 0;
+}
+
+.markdown code:not(pre code) {
+  overflow-wrap: break-word;
 }
