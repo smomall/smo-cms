@@ -1,14 +1,8 @@
 <template>
   <UContainer>
     <!-- 加载中 -->
-    <div
-      v-if="notePending"
-      class="flex justify-center py-20"
-    >
-      <UIcon
-        name="i-lucide-loader-2"
-        class="h-6 w-6 animate-spin text-muted"
-      />
+    <div v-if="notePending" class="flex justify-center py-20">
+      <UIcon name="i-lucide-loader-2" class="h-6 w-6 animate-spin text-muted" />
     </div>
 
     <!-- 加载失败 -->
@@ -81,10 +75,7 @@
       <!-- 右侧：文档内容 -->
       <UPageBody>
         <!-- 文档切换中 -->
-        <div
-          v-if="docPending && !doc"
-          class="space-y-4"
-        >
+        <div v-if="docPending && !doc" class="space-y-4">
           <USkeleton class="h-4 w-32" />
           <USkeleton class="h-8 w-3/4" />
           <USkeleton class="h-4 w-full" />
@@ -103,7 +94,7 @@
 
         <!-- 文档正文 -->
         <article v-else>
-          <div class="flex flex-wrap items-end gap-2 py-2">
+          <div class="flex flex-wrap justify‑end gap-2 py-2">
             <UBadge
               v-if="doc.wordCount"
               color="neutral"
@@ -113,6 +104,7 @@
               :label="`约 ${doc.wordCount} 字`"
             />
           </div>
+          <USeparator />
           <MarkdownRenderer :content="doc.content || ''" />
         </article>
       </UPageBody>
@@ -120,10 +112,7 @@
         <div
           class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 w-full"
         >
-          <MarkdownToc
-            v-if="doc"
-            :content="doc.content || ''"
-          />
+          <MarkdownToc v-if="doc" :content="doc.content || ''" />
         </div>
       </template>
     </UPage>
@@ -140,7 +129,7 @@
           :close="{
             color: 'neutral',
             variant: 'outline',
-            class: 'rounded-full'
+            class: 'rounded-full',
           }"
         >
           <UButton
@@ -148,7 +137,7 @@
             color="neutral"
             variant="solid"
             :ui="{
-              leadingIcon: 'text-primary'
+              leadingIcon: 'text-primary',
             }"
             size="md"
             class="font-bold rounded-full"
@@ -195,7 +184,7 @@
           :close="{
             color: 'neutral',
             variant: 'outline',
-            class: 'rounded-full'
+            class: 'rounded-full',
           }"
         >
           <UButton
@@ -203,7 +192,7 @@
             color="neutral"
             variant="solid"
             :ui="{
-              leadingIcon: 'text-primary'
+              leadingIcon: 'text-primary',
             }"
             size="md"
             class="font-bold rounded-full"
@@ -213,10 +202,7 @@
 
           <template #body>
             <div class="min-w-full size-full m-4 overflow-y-auto">
-              <MarkdownToc
-                v-if="doc"
-                :content="doc.content || ''"
-              />
+              <MarkdownToc v-if="doc" :content="doc.content || ''" />
             </div>
           </template>
         </UDrawer>
@@ -226,34 +212,34 @@
 </template>
 
 <script setup lang="ts">
-import type { ChapterDTO } from '~/types'
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { ChapterDTO } from "~/types";
+import type { NavigationMenuItem } from "@nuxt/ui";
 
-const route = useRoute()
-const id = computed(() => getRouteParam(route.params.id))
-const chapterId = computed(() => getRouteParam(route.params.chapterId))
+const route = useRoute();
+const id = computed(() => getRouteParam(route.params.id));
+const chapterId = computed(() => getRouteParam(route.params.chapterId));
 
 // 笔记详情 + 章节树（SSR）
 const {
   data: note,
   error: noteError,
-  pending: notePending
-} = await useNoteDetail(id)
+  pending: notePending,
+} = await useNoteDetail(id);
 
-const { data: chapters } = await useNoteChapters(id)
+const { data: chapters } = await useNoteChapters(id);
 const { data: doc, pending: docPending } = await useChapterDocument(
   id,
-  chapterId
-)
+  chapterId,
+);
 
 // 构建导航树：仅章节链接，默认全部展开
 function buildNavItems(): NavigationMenuItem[] {
   function buildChapter(ch: ChapterDTO): NavigationMenuItem {
-    const children: NavigationMenuItem[] = []
+    const children: NavigationMenuItem[] = [];
 
     if (ch.children?.length) {
       for (const child of ch.children) {
-        children.push(buildChapter(child))
+        children.push(buildChapter(child));
       }
     }
 
@@ -262,25 +248,25 @@ function buildNavItems(): NavigationMenuItem[] {
       to: `/notes/${id.value}/${ch.id}`,
       defaultOpen: true,
       active: chapterId.value === ch.id,
-      children: children.length ? children : undefined
-    }
+      children: children.length ? children : undefined,
+    };
   }
 
-  return (chapters.value ?? []).map(buildChapter)
+  return (chapters.value ?? []).map(buildChapter);
 }
 
-const navItems = computed(() => buildNavItems())
+const navItems = computed(() => buildNavItems());
 
 // SEO
 useSeoMeta({
   title: () =>
     doc.value?.title
-      ? `${doc.value.title} - ${note.value?.title || '笔记'}`
-      : note.value?.title || '笔记',
+      ? `${doc.value.title} - ${note.value?.title || "笔记"}`
+      : note.value?.title || "笔记",
   description: () => doc.value?.description || note.value?.description,
   ogTitle: () => doc.value?.title || note.value?.title,
   ogDescription: () => doc.value?.description || note.value?.description,
   ogImage: () => note.value?.cover,
-  twitterCard: 'summary_large_image'
-})
+  twitterCard: "summary_large_image",
+});
 </script>

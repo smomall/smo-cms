@@ -36,10 +36,15 @@ export interface ArticleDTO {
   viewCount?: number | null
   likeCount?: number | null
   commentCount?: number | null
+  collectCount?: number | null
   wordCount?: number | null
   rating?: number
+  heatScore?: number | null
   allowComment?: boolean
   publishAt?: string | null
+  /** 发布状态（后端 Integer with @JsonSerialize → string） */
+  status?: string
+  sourceType?: number | null
   source?: string | null
   sourceUrl?: string | null
   seoTitle?: string | null
